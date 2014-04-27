@@ -24,7 +24,7 @@ class AssigneesController < ApplicationController
 	def update
 		@assignee = Assignee.find(params[:id])
 		if @assignee.update_attributes(assignee_params)
-			redirect_to assignee_path(@assignee)
+			redirect_to assignees_path(@assignee)
 		end	
 	end
 

@@ -20,12 +20,11 @@
 		="NOT DONE"
 		= button_to "Mark Done", show_not_done_item_task_path(a), method: :get
 		= button_to "Edit", edit_task_path(a), method: :get
-		= button_to "Delete", task_path(a), method: :delete, confirm: "Are you sure?"
+		= button_to "Delete", task_path(a), method: :delete
 	- else
 		="DONE"
 		= button_to "Edit", edit_task_path(a), method: :get
-		= button_to "Delete", task_path(a), method: :delete, confirm: "Are you sure?"
-
+		= button_to "Delete", task_path(a), method: :delete
 	%br
 	%br
 	</div>
@@ -34,14 +33,14 @@
 
 = form_tag(search_tasks_path, method: "get") do
 	= label_tag("Assignees")
-	= select_tag "search[assignee_name]", options_for_select(Assignee.uniq.pluck(:assignee_name))
+	= select_tag "search[assignee_name]", options_for_select(Assignee.uniq.pluck(:assignee_name)), include_blank: true
 	= label_tag("Tasks")
-	= select_tag "search[task_name]", options_for_select(Task.uniq.pluck(:task_name))
+	= select_tag "search[task_name]", options_for_select(Task.uniq.pluck(:task_name)), include_blank: true
 	= label_tag("Date From:")
 	= text_field_tag "search[due_date_from]"
 	= label_tag("Date To:")
 	= text_field_tag "search[due_date_to]"
 	= label_tag("Task Complete?:")
-	= select_tag "search[done]", options_for_select(["t", "f"])
+	= select_tag "search[done]", options_for_select(["t", "f"]), include_blank: true
 	= submit_tag "Search"
 

@@ -8,6 +8,9 @@
 	<div class="col-lg-4">
 	Name:
 	= a.assignee_name
+	%br
+	Assignee ID:
+	= a.id
 	= button_to "Edit", edit_assignee_path(a), method: :get
 	= button_to "Delete", assignee_path(a), method: :delete
 	%br
