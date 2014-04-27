@@ -1,7 +1,12 @@
-%h1 Tasks
+.jumbotron
+	%h1 Tasks
+	<a class="btn btn-primary" href="/" role="button">Home »</a>
+	<a class="btn btn-primary" href="/tasks/new" role="button">Add a task »</a>
 
+<div class="container">
 - @tasks.each do |a|
-	Name:
+	<div class="col-lg-4">
+	Task:
 	= a.task_name
 	%br
 	Description
@@ -11,34 +16,32 @@
 	= a.due_date
 	%br
 	Task Status:
-	- if a.done == false
+	- if a.done == false	
 		="NOT DONE"
+		= button_to "Mark Done", show_not_done_item_task_path(a), method: :get
+		= button_to "Edit", edit_task_path(a), method: :get
+		= button_to "Delete", task_path(a), method: :delete, confirm: "Are you sure?"
 	- else
 		="DONE"
-	= button_to "Edit", edit_task_path(a), method: :get
-	= button_to "Delete", task_path(a), method: :delete
-	= button_to "Mark Done", show_not_done_item_task_path(a), method: :get
+		= button_to "Edit", edit_task_path(a), method: :get
+		= button_to "Delete", task_path(a), method: :delete, confirm: "Are you sure?"
 
-	/ - if a.done == false then 
-	/ 	=form_for a, url: "tasks/#{a.id}", action: "PUT" do |t|
-	/ 		=t.hidden_field :done, :value => true	
-	/ 		=t.submit "Mark Done"
-	
 	%br
 	%br
+	</div>
+</div>
 
-=link_to "Add a new task", new_task_path
 
 = form_tag(search_tasks_path, method: "get") do
-	= label_tag("Search for assignees")
-	= text_field_tag "search[assignee_name]"
-	= label_tag("Search for tasks")
-	= text_field_tag "search[task_name]"
+	= label_tag("Assignees")
+	= select_tag "search[assignee_name]", options_for_select(Assignee.uniq.pluck(:assignee_name))
+	= label_tag("Tasks")
+	= select_tag "search[task_name]", options_for_select(Task.uniq.pluck(:task_name))
 	= label_tag("Date From:")
 	= text_field_tag "search[due_date_from]"
 	= label_tag("Date To:")
 	= text_field_tag "search[due_date_to]"
 	= label_tag("Task Complete?:")
-	= text_field_tag "search[done]"
+	= select_tag "search[done]", options_for_select(["t", "f"])
 	= submit_tag "Search"
 

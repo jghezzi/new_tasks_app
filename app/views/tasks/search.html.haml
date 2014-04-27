@@ -1,10 +1,32 @@
-%h1 Tasks - Search Results
+.jumbotron
+	%h1 Tasks
+	<a class="btn btn-primary" href="/" role="button">Tasks home »</a>
+	<a class="btn btn-primary" href="/tasks/new" role="button">Add a task »</a>
 
+<div class="container">
 - @tasks.each do |a|
-	Name:
+	<div class="col-lg-4">
+	%b Assigned To:
+	%b #{a.assignee.assignee_name}
+	%br
+	Task:
 	= a.task_name
-	= a.assignee.assignee_name
-	
+	%br
+	Description:
+	= a.description
+	%br
+	Due on:
+	= a.due_date
+	%br
+	Task Status:
+	- if a.done == false	
+		="NOT DONE"
+	- else
+		="DONE"
+
 	%br
 	%br
+	</div>
+</div>
+
 

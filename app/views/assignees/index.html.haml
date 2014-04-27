@@ -1,17 +1,22 @@
-%h1 Assignees
+.jumbotron
+	%h1 Assignees
+	<a class="btn btn-primary" href="/" role="button">Home »</a>
+	<a class="btn btn-primary" href="/assignees/new" role="button">Add an assignee »</a>
 
+<div class="container">
 - @assignees.each do |a|
+	<div class="col-lg-4">
 	Name:
 	= a.assignee_name
 	= button_to "Edit", edit_assignee_path(a), method: :get
 	= button_to "Delete", assignee_path(a), method: :delete
 	%br
 	%br
+	</div>
+</div>
 
-=link_to "Add an assignee", new_assignee_path
-
-= form_tag(search_assignees_path, method: "get") do
-	= label_tag("Search for assignees")
-	= text_field_tag :search_assignee_name
-	= submit_tag "Search"
+/ = form_tag(search_assignees_path, method: "get") do
+/ 	= label_tag("Search for assignees")
+/ 	= text_field_tag :search_assignee_name
+/ 	= submit_tag "Search"
 

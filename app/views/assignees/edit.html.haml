@@ -1,3 +1,8 @@
+.jumbotron
+	%h1 Assignees
+	<a class="btn btn-primary" href="/" role="button">Home »</a>
+	<a class="btn btn-primary" href="/assignees/new" role="button">Add an assignee »</a>
+
 = form_for @assignee, url: "/assignees/#{@assignee.id}", method: :put do |f|
 	= f.label "Name"
 	= f.text_field :assignee_name 

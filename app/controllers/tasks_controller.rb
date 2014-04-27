@@ -47,7 +47,6 @@ def destroy
 		end	
 	end
 
-
 	private
 
 	def task_params

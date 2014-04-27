@@ -1,13 +1,22 @@
+.jumbotron
+	%h1 Tasks
+	<a class="btn btn-primary" href="/" role="button">Tasks home »</a>
 = form_for @task, url: "/tasks/#{@task.id}/update_item_to_done", method: :put do |f|
-	= f.label "Task Name:"
+	<div class="container">
+	= f.label "Task:"
 	= @task.task_name
+	%br
 	= f.label "Description:"
 	= @task.description
+	%br
 	= f.label "Date Due:"
 	= @task.due_date
+	%br
 	= f.label "Completed"
 	= @task.done
+	%br
 	= f.label "Assigned To:"
 	= @task.assignee_id
+	%br
 	= f.hidden_field :done, :value => true	
 	= f.submit "Mark Done"
